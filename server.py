@@ -1,32 +1,40 @@
 from fastmcp import FastMCP
 import math
 
-# Initialize the MCP server instance
-# The cloud entrypoint will look for this 'mcp' object
-mcp = FastMCP("CalculatorCloud")
+# Initialize the MCP server
+mcp = FastMCP("PythonCalculator")
 
 @mcp.tool()
 def calculate(expression: str) -> str:
     """
-    Evaluates a mathematical expression safely.
-    Example: 'math.sqrt(144) + 2'
+    Evaluates a mathematical expression using Python's math library.
+    
+    Supported Python functions:
+    - Basic: +, -, *, /, **
+    - Absolute: abs(x)
+    - Rounding: round(x, n)
+    - Power/Root: pow(x, y), math.sqrt(x)
+    - Trig: math.sin(x), math.cos(x), math.tan(x)
+    
+    Example: 'math.sqrt(abs(-144)) + round(3.14159, 2)'
     """
     try:
-        # Define allowed math functions for safety
+        # A safe dictionary containing the tools you requested
         safe_dict = {
             "math": math,
             "abs": abs,
             "round": round,
             "pow": pow,
-            "sum": sum
+            "sum": sum,
+            "min": min,
+            "max": max
         }
         
-        # We use a restricted eval for this example
+        # Restricted evaluation for security
         result = eval(expression, {"__builtins__": None}, safe_dict)
         return f"Result: {result}"
     except Exception as e:
         return f"Error: {str(e)}"
 
 if __name__ == "__main__":
-    # This block is for local testing; the cloud will use its own runner
     mcp.run()
