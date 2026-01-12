@@ -7,7 +7,7 @@ mcp = FastMCP("PythonCalculator")
 @mcp.tool()
 def calculate(expression: str) -> str:
     """
-    Evaluates a mathematical expression using Python's math library.
+    Evaluates a mathematical expression using Python's math library.all trigonometric functions take radians .
     
     Supported Python functions:
     - Basic: +, -, *, /, **
@@ -16,7 +16,7 @@ def calculate(expression: str) -> str:
     - Power/Root: pow(x, y), math.sqrt(x)
     - Trig: math.sin(x), math.cos(x), math.tan(x)
     
-    Example: 'math.sqrt(abs(-144)) + round(3.14159, 2)'
+    Example: 'math.sqrt(abs(-144)) + math.sin(math.radians(45))'
     """
     try:
         # A safe dictionary containing the tools you requested
