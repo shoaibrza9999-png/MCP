@@ -32,8 +32,11 @@ def calculate(expression: str) -> str:
         
         # Restricted evaluation for security
         result = eval(expression, {"__builtins__": None}, safe_dict)
-        return f"Result: {result}"
-    except Exception as e:
+        if isinstance(result, (int, float)):
+            # 1e-15 is 0.000000000000001
+            if abs(result) < 1e-15:
+                result = 0.0
+        
         return f"Error: {str(e)}"
 
 if __name__ == "__main__":
