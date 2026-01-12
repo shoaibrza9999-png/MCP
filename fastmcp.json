@@ -1,0 +1,10 @@
+{
+  "source": {
+    "type": "filesystem",
+    "path": "server.py",
+    "entrypoint": "mcp"
+  },
+  "deployment": {
+    "transport": "sse"
+  }
+}
